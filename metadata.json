@@ -1,0 +1,4 @@
+{
+  "name": "Otimização de Rota Inteligente para Sabor Express",
+  "description": "Uma aplicação web com IA para otimizar rotas de entrega de comida para 'Sabor Express'. O aplicativo usa clusterização K-Means para agrupar entregas e o algoritmo A* para encontrar o caminho mais eficiente para cada motorista, visualizando os resultados em um mapa interativo e fornecendo um resumo gerado por IA."
+}
