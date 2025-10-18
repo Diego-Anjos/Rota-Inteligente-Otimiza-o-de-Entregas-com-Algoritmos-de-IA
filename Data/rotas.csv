@@ -1,0 +1,18 @@
+origem,destino,peso
+Sabor Express,Cliente F,25
+Sabor Express,Cliente J,20
+Sabor Express,Cliente B,38
+Sabor Express,Cliente L,55
+Cliente A,Cliente I,20
+Cliente A,Cliente F,30
+Cliente B,Cliente H,22
+Cliente B,Cliente L,15
+Cliente C,Cliente I,25
+Cliente C,Cliente D,28
+Cliente D,Cliente K,25
+Cliente E,Cliente K,28
+Cliente E,Cliente G,32
+Cliente F,Cliente I,22
+Cliente H,Cliente L,30
+Cliente J,Cliente D,20
+Cliente J,Cliente E,35
