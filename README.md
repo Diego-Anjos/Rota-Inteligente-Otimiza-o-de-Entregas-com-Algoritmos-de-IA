@@ -81,7 +81,7 @@ Bash
 
 git clone (https://github.com/Diego-Anjos/Rota-Inteligente-Otimizacao-de-Entregas-com-Algoritmos-de-IA.git)
 
-cd <Sabor Express Projeto>
+cd Sabor Express Projeto
 
 Instale as dependências: Este comando irá ler o arquivo package.json e instalar todas as bibliotecas e ferramentas necessárias para o projeto.
 
