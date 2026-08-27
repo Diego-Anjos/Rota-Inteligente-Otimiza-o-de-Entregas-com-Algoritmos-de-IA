@@ -28,6 +28,13 @@ export interface OptimizedRoute {
   custoTotal: number;
 }
 
+/** Resultado completo da otimização, com transparência sobre avisos e falhas. */
+export interface OptimizeResult {
+  routes: OptimizedRoute[];
+  warnings: string[];
+  undeliverable: string[];
+}
+
 export interface Graph {
   [key: string]: { [key: string]: number };
 }

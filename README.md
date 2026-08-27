@@ -1,99 +1,103 @@
-🚀 Rota-Inteligente-Otimiza-o-de-Entregas-com-Algoritmos-de-IA
-Solução de IA para otimização logística de delivery. Implementação do algoritmo A* para cálculo de rotas e K-Means para clustering de entregas. Projeto acadêmico.
+# Rota Inteligente
 
-Rota Inteligente: Otimização de Entregas com Algoritmos de IA
-Projeto desenvolvido para a disciplina Artificial Intelligence Fundamentals da UniFECAF.
+**Trabalho acadêmico — UniFECAF · Caso Sabor Express**  
+*Artificial Intelligence Fundamentals*
 
-### 1. Descrição do Problema
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+
 ---
-A "Sabor Express", uma empresa local de delivery de alimentos, enfrenta um grande desafio logístico para gerenciar suas entregas, especialmente durante os horários de pico. Atualmente, os percursos são definidos de forma manual, o que resulta em rotas ineficientes, atrasos, custos elevados com combustível e insatisfação dos clientes.
 
-Objetivo do Projeto
+## 📌 Sobre o Projeto
 
-O objetivo central deste projeto é desenvolver uma solução inteligente, baseada em algoritmos de Inteligência Artificial, capaz de analisar múltiplos pontos de entrega e sugerir as rotas mais otimizadas para os entregadores.
+O **Rota Inteligente** é uma aplicação **SPA (Single Page Application)** que otimiza rotas de entrega **inteiramente no navegador**, sem necessidade de backend.
 
-### 2. Abordagem Adotada
+Inspirado no cenário logístico da **Sabor Express**, o sistema modela a cidade como um grafo e combina duas técnicas clássicas de Inteligência Artificial:
+
+| Algoritmo | Papel na solução |
+| --- | --- |
+| **K-Means** | Agrupa pedidos em zonas geográficas, distribuindo a carga entre entregadores |
+| **A\*** | Calcula o menor caminho (menor custo) para cada rota no grafo |
+
+O resultado é um plano de entrega visual e quantificável: clusters coloridos no mapa, sequência de pontos e custo operacional por motorista — tudo processado localmente, de forma rápida e transparente.
+
+![Demonstração da aplicação](./assets/screenshot-app.png)
+
 ---
-Para solucionar o desafio, a cidade foi modelada como um grafo ponderado. Nesta estrutura, os nós representam os locais de entrega, e as arestas representam as ruas, com pesos que indicam o custo (distância/tempo) do trajeto.
 
-A solução foi estruturada em duas frentes:
+## ✨ Funcionalidades Principais
 
-Agrupamento de Entregas (Clustering): Usando o algoritmo K-Means, os pedidos são agrupados em zonas geográficas para otimizar o trabalho de múltiplos entregadores.
+- **📂 Leitura de CSV** — Importação dos datasets de pontos, rotas e pedidos (via upload ou dados de exemplo embutidos), com parsing robusto no cliente.
+- **🛡️ Validação semântica** — Checagem cruzada entre arquivos: base de origem, arestas com peso válido, IDs órfãos e **clientes inalcançáveis** a partir da base. Edge cases são tratados com mensagens claras, sem falhas silenciosas.
+- **🧠 Otimização no browser** — K-Means + A* executados em serviços TypeScript, sem servidor.
+- **📱 Layout responsivo** — Interface adaptável a desktop e dispositivos móveis, com mapa interativo e painel de resultados.
 
-Otimização de Rota (Menor Caminho): Para cada grupo de entregas, o algoritmo A* é utilizado para encontrar o caminho com o menor custo total.
-
-### 3.📊 Algoritmos Utilizados
 ---
-Algoritmo K-Means para Agrupamento de Entregas
 
-Para cenários de alta demanda, o K-Means foi utilizado para agrupar os pontos de entrega em K clusters (zonas), com base em sua proximidade. Isso divide um problema grande em vários menores e mais gerenciáveis, um para cada motorista.
+## 🚀 Como Executar
 
-Algoritmo A* (A-Star) para Otimização de Rota
+### Pré-requisitos
 
-Para encontrar o menor caminho no grafo, o algoritmo A* foi escolhido. Diferente de buscas como BFS ou DFS, o A* é uma busca "informada" que utiliza uma função heurística para estimar o custo até o destino. Isso o torna extremamente eficiente para encontrar a rota de menor custo em um mapa com distâncias variadas, garantindo uma solução ótima para o problema.
+- [Node.js](https://nodejs.org/) **16+** (recomendado: LTS)
+- npm (incluído na instalação do Node.js)
 
-![Demonstração da Aplicação](./assets/screenshot-app.png)
+### Instalação e uso
 
-### 4. Diagrama do Grafo e Interface da Solução
----
-A solução foi implementada em uma aplicação interativa que permite visualizar tanto o cenário do problema quanto a solução otimizada. A imagem demonstra a interface com o mapa (diagrama do grafo) e o relatório de resultados gerado a partir dos dados de um arquivo CSV.
+```bash
+# 1. Clone o repositório
+git clone https://github.com/Diego-Anjos/Rota-Inteligente-Otimizacao-de-Entregas-com-Algoritmos-de-IA.git
 
-### 5. Análise de Resultados
----
-A aplicação desenvolvida provou a eficiência da abordagem. Conforme exibido na imagem acima, ao processar os dados para 2 motoristas, a solução gerou os seguintes resultados:
+# 2. Entre na pasta do projeto
+cd "Rota Inteligente"
 
-Motorista 1 (Cluster A, C, D, I, K): Cumpriu sua rota com um Custo Total de R$ 218,00.
-
-Motorista 2 (Cluster B, E, G, H): Atendeu os clientes com um Custo Total de R$ 294,00.
-
-O Custo Operacional Total para a operação foi de R$ 512,00. Estes resultados, obtidos em segundos, demonstram a capacidade da solução de automatizar decisões complexas e fornecer um plano de ação claro e quantificável, validando o impacto positivo na redução de custos e no planejamento logístico.
-
-Limitações e Sugestões de Melhoria
-
-Dados Estáticos: O modelo atual utiliza pesos fixos e não considera variáveis dinâmicas como trânsito em tempo real.
-
-Sugestão: Integrar a solução com APIs de mapas (como Google Maps) para obter dados de tráfego e recalcular as rotas dinamicamente.
-
-### 6. ⚙️ Instruções de Execução do Projeto
----
-O projeto foi desenvolvido como uma aplicação web moderna utilizando TypeScript e o framework React, com o ambiente de desenvolvimento Vite.
-
-Tecnologias Utilizadas
-Node.js: Ambiente de execução do JavaScript.
-
-React: Biblioteca para construção da interface do usuário.
-
-TypeScript: Superset do JavaScript que adiciona tipagem estática.
-
-Vite: Ferramenta de build para um desenvolvimento frontend mais rápido.
-
-NPM: Gerenciador de pacotes do Node.js.
-
-Pré-requisitos
-Node.js (versão 16 ou superior). Você pode baixar em nodejs.org.
-
-Git para clonar o repositório.
-
-Passos para Instalação e Execução
-Clone o repositório: Abra seu terminal, navegue até a pasta onde deseja salvar o projeto e execute o comando:
-
-Bash
-
-git clone (https://github.com/Diego-Anjos/Rota-Inteligente-Otimizacao-de-Entregas-com-Algoritmos-de-IA.git)
-
-cd Sabor Express Projeto
-
-Instale as dependências: Este comando irá ler o arquivo package.json e instalar todas as bibliotecas e ferramentas necessárias para o projeto.
-
-Bash
-
+# 3. Instale as dependências
 npm install
 
-Execute a aplicação em modo de desenvolvimento: Este comando inicia o servidor de desenvolvimento do Vite.
-
-Bash
-
+# 4. Suba o servidor de desenvolvimento
 npm run dev
-Abra o software no navegador: Após executar o comando acima, o terminal exibirá uma mensagem indicando que o servidor está rodando. Abra o endereço Local que aparecerá no seu navegador para ver e interagir com a aplicação.
+```
 
-➜  Local:   http://localhost:3000/
+Em seguida, abra no navegador o endereço indicado no terminal (por padrão: [http://localhost:3000](http://localhost:3000)).
+
+> **Dica:** use `npm run build` para gerar a versão de produção e `npm run preview` para pré-visualizá-la.
+
+---
+
+## 🗂️ Estrutura de Pastas
+
+```text
+Rota Inteligente/
+├── components/          # Interface: mapa, upload de CSV e painel de resultados
+│   ├── FileUpload.tsx
+│   ├── Map.tsx
+│   └── Results.tsx
+├── services/            # Lógica de negócio e algoritmos (K-Means, A*, validação)
+│   ├── dataService.ts
+│   └── optimizationService.ts
+├── Data/                # CSVs de exemplo (pontos, rotas, pedidos)
+├── assets/              # Imagens e materiais de demonstração
+├── App.tsx              # Orquestração da SPA e estado da aplicação
+├── constants.ts         # Dados padrão, cores dos clusters e IDs fixos
+├── types.ts             # Tipagens TypeScript compartilhadas
+└── ...
+```
+
+| Pasta / arquivo | Responsabilidade |
+| --- | --- |
+| `components/` | Camada de apresentação e interação com o usuário |
+| `services/` | Onde moram os algoritmos e a validação dos dados |
+| `Data/` | Conjuntos CSV usados como cenário de demonstração |
+
+---
+
+## 🎓 Contexto Acadêmico
+
+Projeto desenvolvido para a disciplina **Artificial Intelligence Fundamentals** da **UniFECAF**, aplicado ao caso da empresa fictícia **Sabor Express**: substituir o planejamento manual de entregas por uma solução baseada em IA, reduzindo custo e atrasos com decisões automatizadas e auditáveis.
+
+---
+
+<p align="center">
+  Feito com foco em clareza algorítmica e experiência no navegador.
+</p>

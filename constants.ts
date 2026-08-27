@@ -1,8 +1,10 @@
-
 import type { Point, Edge, Pedido } from './types';
 
+/** Identificador do depósito / base de saída das rotas. */
+export const BASE_DEPOT_ID = 'Sabor Express';
+
 export const PONTOS: Point[] = [
-  { ponto: 'Sabor Express', coord_x: 50, coord_y: 50 },
+  { ponto: BASE_DEPOT_ID, coord_x: 50, coord_y: 50 },
   { ponto: 'Cliente A', coord_x: 15, coord_y: 80 },
   { ponto: 'Cliente B', coord_x: 25, coord_y: 20 },
   { ponto: 'Cliente C', coord_x: 55, coord_y: 95 },
@@ -13,9 +15,9 @@ export const PONTOS: Point[] = [
 ];
 
 export const ROTAS: Edge[] = [
-  { origem: 'Sabor Express', destino: 'Cliente A', peso: 35 },
-  { origem: 'Sabor Express', destino: 'Cliente F', peso: 25 },
-  { origem: 'Sabor Express', destino: 'Cliente B', peso: 38 },
+  { origem: BASE_DEPOT_ID, destino: 'Cliente A', peso: 35 },
+  { origem: BASE_DEPOT_ID, destino: 'Cliente F', peso: 25 },
+  { origem: BASE_DEPOT_ID, destino: 'Cliente B', peso: 38 },
   { origem: 'Cliente A', destino: 'Cliente C', peso: 42 },
   { origem: 'Cliente A', destino: 'Cliente F', peso: 30 },
   { origem: 'Cliente B', destino: 'Cliente G', peso: 20 },

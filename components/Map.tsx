@@ -1,6 +1,6 @@
-
 import React from 'react';
 import type { Point, Edge, OptimizedRoute } from '../types';
+import { BASE_DEPOT_ID } from '../constants';
 
 interface MapProps {
   pontos: Point[];
@@ -9,7 +9,8 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ pontos, rotas, optimizedRoutes }) => {
-  const padding = 20;
+  // Extra room so node labels (above + centered) never clip on SVG edges.
+  const padding = 48;
   const width = 500;
   const height = 500;
 
@@ -20,15 +21,19 @@ const Map: React.FC<MapProps> = ({ pontos, rotas, optimizedRoutes }) => {
   const minY = Math.min(...allY);
   const maxY = Math.max(...allY);
 
-  const scaleX = (x: number) => padding + ((x - minX) / (maxX - minX)) * (width - 2 * padding);
-  const scaleY = (y: number) => padding + ((y - minY) / (maxY - minY)) * (height - 2 * padding);
+  const rangeX = maxX - minX || 1;
+  const rangeY = maxY - minY || 1;
+  const scaleX = (x: number) => padding + ((x - minX) / rangeX) * (width - 2 * padding);
+  const scaleY = (y: number) => padding + ((y - minY) / rangeY) * (height - 2 * padding);
 
   // FIX: Use `globalThis.Map` to avoid a name collision with the `Map` component.
-  const pointMap = new globalThis.Map(pontos.map(p => [p.ponto, { x: scaleX(p.coord_x), y: scaleY(p.coord_y) }]));
+  const pointMap = new globalThis.Map<string, { x: number; y: number }>(
+    pontos.map(p => [p.ponto, { x: scaleX(p.coord_x), y: scaleY(p.coord_y) }])
+  );
 
   return (
-    <div className="bg-white dark:bg-slate-800 p-4 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700">
-      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
+    <div className="bg-white dark:bg-slate-800 p-3 sm:p-4 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 w-full min-w-0 overflow-hidden">
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto block max-w-full" preserveAspectRatio="xMidYMid meet">
         {/* All possible routes (faint) */}
         {rotas.map((rota, i) => {
           const p1 = pointMap.get(rota.origem);
@@ -81,7 +86,7 @@ const Map: React.FC<MapProps> = ({ pontos, rotas, optimizedRoutes }) => {
         {pontos.map(ponto => {
           const p = pointMap.get(ponto.ponto);
           if (!p) return null;
-          const isSaborExpress = ponto.ponto === 'Sabor Express';
+          const isSaborExpress = ponto.ponto === BASE_DEPOT_ID;
           const cluster = optimizedRoutes?.find(r => r.cluster.pedidos.some(ped => ped.ponto_entrega === ponto.ponto))?.cluster;
           const fillColor = cluster ? cluster.color : (isSaborExpress ? '#FBBF24' : '#64748B');
 
